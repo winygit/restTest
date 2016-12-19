@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.1.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+
+
+	<!-- 配置自动扫描的包 -->
+	<context:component-scan base-package="com.hna"></context:component-scan>
+	<context:property-placeholder location="classpath:*-Config.properties"  />
+
+	<!-- 配置 SpringMVC 的视图解析器 -->
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/pages/"></property>
+		<property name="suffix" value=".jsp"></property>
+	</bean>
+
+    <!-- 系统环境 -->
+    <bean id="mobileuat" class="com.hna.model.OtaConfig">
+	<property name="hostIP" value="${hostIP}" />
+	<property name="OTACode" value="${gs.mobile.OTACode}" />
+	<property name="key" value="${gs.uat.mobile.key}" />
+	<property name="restUrl" value="${gs.uat.restUrl}" />
+    </bean>
+
+	<bean id="mobilepro" class="com.hna.model.OtaConfig">
+		<property name="hostIP" value="${hostIP}" />
+		<property name="OTACode" value="${gs.mobile.OTACode}" />
+		<property name="key" value="${gs.pro.mobile.key}" />
+		<property name="restUrl" value="${gs.pro.restUrl}" />
+	</bean>
+
+	<bean id="qunaruat" class="com.hna.model.OtaConfig">
+		<property name="hostIP" value="${hostIP}" />
+		<property name="OTACode" value="${gs.qunar.OTACode}" />
+		<property name="key" value="${gs.uat.qunar.key}" />
+		<property name="restUrl" value="${gs.uat.restUrl}" />
+	</bean>
+
+	<bean id="qunarpro" class="com.hna.model.OtaConfig">
+		<property name="hostIP" value="${hostIP}" />
+		<property name="OTACode" value="${gs.qunar.OTACode}" />
+		<property name="key" value="${gs.pro.qunar.key}" />
+		<property name="restUrl" value="${gs.pro.restUrl}" />
+	</bean>
+
+	<bean id="hbgjuat" class="com.hna.model.OtaConfig">
+		<property name="hostIP" value="${hostIP}" />
+		<property name="OTACode" value="${gs.hbgj.OTACode}" />
+		<property name="key" value="${gs.uat.hbgj.key}" />
+		<property name="restUrl" value="${gs.uat.restUrl}" />
+	</bean>
+
+	<bean id="hbgjpro" class="com.hna.model.OtaConfig">
+		<property name="hostIP" value="${hostIP}" />
+		<property name="OTACode" value="${gs.hbgj.OTACode}" />
+		<property name="key" value="${gs.pro.hbgj.key}" />
+		<property name="restUrl" value="${gs.pro.restUrl}" />
+	</bean>
+
+</beans>
