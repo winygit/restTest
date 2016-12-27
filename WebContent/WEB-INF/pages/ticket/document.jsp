@@ -11,8 +11,6 @@
  {
       alert("出票成功后,请注意及时退票！")
  }
-
-
 </script>
 </head>
 <body>
@@ -27,7 +25,7 @@ tripId (@Uri)<input type="text" name="tripId"  value=""></input>
 </div>
 - -->
 <!--***************************************************************-->
-
+<c:if test="${sessionScope.env=='uat'}">
 <h3> 支付出票</h3>
 <form action="${pageContext.request.contextPath}/<%=documentReservation %>" method="post"  onsubmit="drSubmit()">
 订单号<input type="text" name="reservationCode"  value=""></input>
@@ -47,6 +45,11 @@ tripId (@Uri)<input type="text" name="tripId"  value=""></input>
 
 <input type="submit" value="支付出票"/>
 </form>
+
+</c:if>
+<c:if test="${sessionScope.env=='pro'}">
+ <P> 生产环境请去官网支付出票！！！</P>
+</c:if>
 
 </body>
 </html>

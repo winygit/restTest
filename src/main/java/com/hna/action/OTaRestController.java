@@ -1,12 +1,10 @@
 package com.hna.action;
 
-import java.io.FileInputStream;
 import java.lang.reflect.Type;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,16 +21,17 @@ import com.hna.helper.AirLowFareSearchRSHelper;
 import com.hna.helper.ReservationInfoHelper;
 import com.hna.helper.TripCalculationRSHelper;
 import com.hna.model.OtaConfig;
+import com.hna.model.requestFormValue.TripSearchFv;
 import com.hna.response.ServiceResult;
 import com.hna.rest.model.ReservationListInfo;
 import com.hna.service.ConfigSevice;
+import com.hna.service.HttpService;
 import com.hna.tdp.model.AirLowFareSearchRSMo;
 import com.hna.tdp.model.TripMo;
 import com.hna.tdp.model.ReservationRetrieve.ReservationInfoMo;
 import com.hna.tdp.model.refund.OrderMo;
 import com.hna.tdp.value.AirLowFareSearchRSVo;
 import com.hna.util.GsonUtil;
-import com.hna.util.HttpClientUtil;
 import com.hna.util.RegexSwitch;
 import com.hna.view.TripCalculation;
 import com.hna.view.TripSegment;
@@ -49,16 +48,21 @@ public class OTaRestController {
     @Autowired
     private ReservationInfoHelper reservationInfoHelper;
     @Autowired
-    private HttpClientUtil httpservice;
-    @Autowired
     private ConfigSevice configSevice;
-
-
+    @Autowired
+    private HttpService httpService;
 
     private Gson gson = new Gson();
 
     @RequestMapping(value = { "/searchLowFareTrips", "/search-low-fare-trips" })
-    public ModelAndView airLowFareSearch(HttpServletRequest request, ModelAndView mav) {
+    public ModelAndView airLowFareSearch(HttpServletRequest request, ModelAndView mav, TripSearchFv fv) {
+
+        // TripsSearchRv rv = tripsSearchMapper.mapper(fv);
+        // Map<String, Object> requestParams =
+        // tripsSearchMapper.mapperToRequestMap(rv);
+        //
+        // ServiceResult serviceResult = getJsonData(request, requestParams,
+        // configSevice.getOtaConfig("UAT", "mobile"));
 
         ServiceResult serviceResult = getJsonData(request);
         String jsonStr = RegexSwitch.switchForTDP(serviceResult.getResult());
@@ -86,6 +90,7 @@ public class OTaRestController {
         return mav;
     }
 
+
     @RequestMapping("/{method}")
     public ModelAndView invokeRest(HttpServletRequest request, ModelAndView mav, @PathVariable String method) {
 
@@ -98,6 +103,14 @@ public class OTaRestController {
         return mav;
 
         }
+
+    @RequestMapping("/main")
+    public ModelAndView backmain(ModelAndView mav) {
+
+        System.out.println("99999999999");
+        mav.setViewName("ticketRest");
+        return mav;
+    }
 
     @RequestMapping("/login")
     public ModelAndView login(HttpServletRequest request, ModelAndView mav) {
@@ -116,15 +129,14 @@ public class OTaRestController {
         log.debug("env:{}  ota: {}", env, otaCode);
 
         OtaConfig config = configSevice.getOtaConfig(env, otaCode);
-        // System.out.println(config);
-        // 放入session
-        // request.getSession().setAttribute("otaconfig", config);
 
         /*
          * 登录
          */
         String username = request.getParameter("username").trim();
 
+        // ServiceResult serviceResult = getJsonDataNew(request,
+        // configSevice.getLoginOtaConfig(env, otaCode));
         ServiceResult serviceResult = getJsonData(request);
         String jsonStr = RegexSwitch.switchForTDP(serviceResult.getResult());
         if (!StringUtils.isEmpty(jsonStr)) {
@@ -139,10 +151,15 @@ public class OTaRestController {
                     request.getSession(true).setAttribute("login", login);
                     request.getSession(true).setAttribute("userId", userId);
                     request.getSession(true).setAttribute("userName", username);
+                    request.getSession(true).setAttribute("env", env);
+                    request.getSession(true).setAttribute("ota", otaCode);
 
                     log.debug("userId:{} ,userName {}", userId, username);
                     log.debug("otaconfig:{} ,login {}", config, login);
-                    mav.setViewName("APPticketUAT");
+                    // mav.setViewName("APPticketUAT");
+
+                    mav.setViewName("ticketRest");
+                    // mav.setViewName("ticket/flightSearch");
                     return mav;
 
                 }
@@ -312,34 +329,27 @@ public class OTaRestController {
         return mav;
     }
 
-    private ServiceResult getJsonData(String filename) {
-        ServiceResult serviceResult = new ServiceResult();
-        String str = null;
-        try {
-            FileInputStream fos = new FileInputStream(filename);
-            str = IOUtils.toString(fos, "gbk");
-            fos.close();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
 
-        serviceResult.setResult(str);
-        return serviceResult;
-        // return str;
-    }
 
     // 获取json数据。
     public ServiceResult getJsonData(HttpServletRequest request) {
 
-        // String method =
-        // request.getRequestURI().substring(request.getContextPath().length() +
-        // 1);
-        String method = request.getServletPath().substring(1);
-        // String url = otaConfig.getRestUrl() + method;
+        OtaConfig otaConfig = (OtaConfig) request.getSession().getAttribute("otaconfig");
 
-        ServiceResult serviceResult = httpservice.sendPostRequest(request, method);
+        String method = request.getServletPath().replace("/new", "").substring(1);
+        if (method.contains("login")) {
+            // 如果是生产环境
+            if ("pro".equalsIgnoreCase(request.getParameter("env"))) {
+                otaConfig = configSevice.getOtaConfig("pro", "mobile");
+            } else {
+                otaConfig = configSevice.getOtaConfig("uat", "mobile");
+            }
+        }
+        String url = otaConfig.getRestUrl() + method;
+
+        ServiceResult serviceResult = httpService.sendPost(url, request, otaConfig);
         serviceResult.setMethod(method);
-
         return serviceResult;
     }
+
 }

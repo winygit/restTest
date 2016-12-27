@@ -39,7 +39,13 @@
 		渠道选择 <select style="width: 80px;height:25px;margin:0px 30px 0px 10px" name="otaCode">
 			<option value="mobile" selected="selected">手机APP</option>
 			<option value="qunar">去哪儿</option>
+			<option value="xiecheng">携程</option>
 			<option value="hbgj">航班管家</option>
+			<option value="wechat">微信</option>
+			<option value="kuxun">酷讯</option>
+			<option value="taobao">淘宝</option>
+			<option value="tongcheng">同程</option>
+			<option value="taifu">泰复</option>
 		</select>
 		</fieldset>
 		</p>

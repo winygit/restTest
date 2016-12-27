@@ -23,7 +23,7 @@ public class webFilter implements Filter {
         //
         // System.out.println("检查登录！！！");
         HttpServletRequest httpRequest = (HttpServletRequest) request;
-        // 未登录 ，先去登录
+        // 未登录 ，先去登录. 登录接口不检查
         boolean flag = httpRequest.getServletPath().contains("/login");
         if (!flag && StringUtils.isEmpty(httpRequest.getSession().getAttribute("login"))) {
             request.setAttribute("loginRs", "请先登录");

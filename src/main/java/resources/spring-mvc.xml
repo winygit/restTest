@@ -20,7 +20,8 @@
 		<property name="suffix" value=".jsp"></property>
 	</bean>
 
-    <!-- 系统环境 -->
+    <!-- ***************系统环境********************* -->
+    <!-- 手机APP -->
     <bean id="mobileuat" class="com.hna.model.OtaConfig">
 	<property name="hostIP" value="${hostIP}" />
 	<property name="OTACode" value="${gs.mobile.OTACode}" />
@@ -35,6 +36,7 @@
 		<property name="restUrl" value="${gs.pro.restUrl}" />
 	</bean>
 
+    <!-- 去哪儿 -->
 	<bean id="qunaruat" class="com.hna.model.OtaConfig">
 		<property name="hostIP" value="${hostIP}" />
 		<property name="OTACode" value="${gs.qunar.OTACode}" />
@@ -49,6 +51,7 @@
 		<property name="restUrl" value="${gs.pro.restUrl}" />
 	</bean>
 
+    <!-- 航班管家 -->
 	<bean id="hbgjuat" class="com.hna.model.OtaConfig">
 		<property name="hostIP" value="${hostIP}" />
 		<property name="OTACode" value="${gs.hbgj.OTACode}" />
@@ -62,5 +65,96 @@
 		<property name="key" value="${gs.pro.hbgj.key}" />
 		<property name="restUrl" value="${gs.pro.restUrl}" />
 	</bean>
+	
+	<!-- 微信 -->
+	<bean id="wechatuat" class="com.hna.model.OtaConfig">
+		<property name="hostIP" value="${hostIP}" />
+		<property name="OTACode" value="${gs.wechat.OTACode}" />
+		<property name="key" value="${gs.uat.wechat.key}" />
+		<property name="restUrl" value="${gs.uat.restUrl}" />
+	</bean>
+
+	<bean id="wechatpro" class="com.hna.model.OtaConfig">
+		<property name="hostIP" value="${hostIP}" />
+		<property name="OTACode" value="${gs.wechat.OTACode}" />
+		<property name="key" value="${gs.pro.wechat.key}" />
+		<property name="restUrl" value="${gs.pro.restUrl}" />
+	</bean>
+	
+	<!-- 酷讯 -->
+	<bean id="kuxunuat" class="com.hna.model.OtaConfig">
+		<property name="hostIP" value="${hostIP}" />
+		<property name="OTACode" value="${gs.kuxun.OTACode}" />
+		<property name="key" value="${gs.uat.kuxun.key}" />
+		<property name="restUrl" value="${gs.uat.restUrl}" />
+	</bean>
+
+	<bean id="kuxunpro" class="com.hna.model.OtaConfig">
+		<property name="hostIP" value="${hostIP}" />
+		<property name="OTACode" value="${gs.kuxun.OTACode}" />
+		<property name="key" value="${gs.pro.kuxun.key}" />
+		<property name="restUrl" value="${gs.pro.restUrl}" />
+	</bean>
+
+	<!-- 淘宝 -->
+	<bean id="taobaouat" class="com.hna.model.OtaConfig">
+		<property name="hostIP" value="${hostIP}" />
+		<property name="OTACode" value="${gs.taobao.OTACode}" />
+		<property name="key" value="${gs.uat.taobao.key}" />
+		<property name="restUrl" value="${gs.uat.restUrl}" />
+	</bean>
+
+	<bean id="taobaopro" class="com.hna.model.OtaConfig">
+		<property name="hostIP" value="${hostIP}" />
+		<property name="OTACode" value="${gs.taobao.OTACode}" />
+		<property name="key" value="${gs.pro.taobao.key}" />
+		<property name="restUrl" value="${gs.pro.restUrl}" />
+	</bean>
+	
+	<!-- 同程 -->
+	<bean id="tongchenguat" class="com.hna.model.OtaConfig">
+		<property name="hostIP" value="${hostIP}" />
+		<property name="OTACode" value="${gs.tongcheng.OTACode}" />
+		<property name="key" value="${gs.uat.tongcheng.key}" />
+		<property name="restUrl" value="${gs.uat.restUrl}" />
+	</bean>
+
+	<bean id="tongchengpro" class="com.hna.model.OtaConfig">
+		<property name="hostIP" value="${hostIP}" />
+		<property name="OTACode" value="${gs.tongcheng.OTACode}" />
+		<property name="key" value="${gs.pro.tongcheng.key}" />
+		<property name="restUrl" value="${gs.pro.restUrl}" />
+	</bean>
+	
+	<!-- 携程 -->
+	<bean id="xiechenguat" class="com.hna.model.OtaConfig">
+		<property name="hostIP" value="${hostIP}" />
+		<property name="OTACode" value="${gs.xiecheng.OTACode}" />
+		<property name="key" value="${gs.uat.xiecheng.key}" />
+		<property name="restUrl" value="${gs.uat.restUrl}" />
+	</bean>
+
+	<bean id="xiechengpro" class="com.hna.model.OtaConfig">
+		<property name="hostIP" value="${hostIP}" />
+		<property name="OTACode" value="${gs.xiecheng.OTACode}" />
+		<property name="key" value="${gs.pro.xiecheng.key}" />
+		<property name="restUrl" value="${gs.pro.restUrl}" />
+	</bean>
+	
+	<!-- 泰复-->
+	<bean id="taifuuat" class="com.hna.model.OtaConfig">
+		<property name="hostIP" value="${hostIP}" />
+		<property name="OTACode" value="${gs.taifu.OTACode}" />
+		<property name="key" value="${gs.uat.taifu.key}" />
+		<property name="restUrl" value="${gs.uat.restUrl}" />
+	</bean>
+
+	<bean id="taifupro" class="com.hna.model.OtaConfig">
+		<property name="hostIP" value="${hostIP}" />
+		<property name="OTACode" value="${gs.taifu.OTACode}" />
+		<property name="key" value="${gs.pro.taifu.key}" />
+		<property name="restUrl" value="${gs.pro.restUrl}" />
+	</bean>
+	
 
 </beans>

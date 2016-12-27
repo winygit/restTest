@@ -22,6 +22,12 @@ $(function () {
 
 })
 
+function backtomain()
+{
+    location.href='${pageContext.request.contextPath}/api/main.do';
+}
+
+
 function getOriginalJson()
 {
 
@@ -78,7 +84,7 @@ function recall()
 	    <textarea rows="5" cols="100" id="params" >  ${serviceResult.params} </textarea> 
 	    </li>
 	    <li> <button onmousedown="recall()"> 再次提交 </button> </li>
-	    <li>返回状态码：${serviceResult.code} </li>
+	    <li><p>返回状态码:${serviceResult.code}  &nbsp;&nbsp;   响应时间:${serviceResult.respondTime}ms</p></li>
 	 </ul>
    </div>
 	 
@@ -93,6 +99,7 @@ function recall()
 						<jsp:include page="${serviceResult.resultJsp}" />
 						<p>
 					     <button onmousedown="getOriginalJson()">查看原始json</button> 
+					      <button style="margin:0  50;" onmousedown="backtomain()">回主页</button>
 					    </p>
 					</c:otherwise>
 				</c:choose>

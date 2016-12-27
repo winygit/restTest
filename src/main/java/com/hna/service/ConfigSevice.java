@@ -9,6 +9,9 @@ import org.springframework.stereotype.Component;
 
 import com.hna.model.OtaConfig;
 
+/*
+ * 确定otaConfig
+ */
 @Component
 public class ConfigSevice {
 
@@ -18,27 +21,10 @@ public class ConfigSevice {
         ApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring-mvc.xml");
         String beanName = ota + env;
         return (OtaConfig) applicationContext.getBean(beanName.toLowerCase());
-        // if (env.equalsIgnoreCase("uat")) {
-        // switch (ota.toLowerCase()) {
-        // case "qunar":
-        // return (OtaConfig) applicationContext.getBean("qunarUat");
-        // case "hbgj":
-        // return (OtaConfig) applicationContext.getBean("hbgjUat");
-        // default:
-        // return (OtaConfig) applicationContext.getBean("mobileUat");
-        // }
-        // }
-        // else {
-        // switch (ota.toLowerCase()) {
-        // case "qunar":
-        // return (OtaConfig) applicationContext.getBean("qunarPro");
-        // case "hbgj":
-        // return (OtaConfig) applicationContext.getBean("hbgjPro");
-        // default:
-        // return (OtaConfig) applicationContext.getBean("mobilePro");
-        // }
-        //
-        // }
+    }
 
+    // 登录接口使用的ota只能是mobile
+    public OtaConfig getLoginOtaConfig(String env, String ota) {
+        return getOtaConfig(env, "mobile");
     }
 }

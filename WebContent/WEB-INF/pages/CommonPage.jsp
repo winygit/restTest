@@ -69,7 +69,7 @@
    String refundApply= refundApplyApi;
    
    OtaConfig  otaConfig=(OtaConfig)request.getSession().getAttribute("otaconfig");
-   if((otaConfig!=null) && otaConfig.getOTACode().contains("MOBILE"))
+   if((otaConfig!=null) && (otaConfig.getOTACode().contains("MOBILE") ||otaConfig.getOTACode().contains("WECHAT")))
    {
     
     searchTrips=searchTripsApp;

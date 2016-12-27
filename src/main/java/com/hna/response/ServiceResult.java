@@ -24,6 +24,8 @@ public class ServiceResult {
     public String resultJsp = "default";
     public String method;
 
+    public long respondTime;
+
     public String getUrl() {
         return url;
     }
@@ -78,6 +80,14 @@ public class ServiceResult {
 
     public void setMethod(String method) {
         this.method = method;
+    }
+
+    public long getRespondTime() {
+        return respondTime;
+    }
+
+    public void setRespondTime(long respondTime) {
+        this.respondTime = respondTime;
     }
 
 }
