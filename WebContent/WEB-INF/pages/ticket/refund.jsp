@@ -9,7 +9,9 @@
 </head>
 <body>
 
-<h2>退票</h2> 
+	<div align="center">
+		<h2>退 票</h2>
+	</div> 
 <h3> 退票查询</h3>
 <!-- 
 <form action="${pageContext.request.contextPath}/app/refundDetail.json" method="post">

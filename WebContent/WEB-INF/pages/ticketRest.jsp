@@ -61,6 +61,7 @@
       //$("input[type=submit]").before($("#ticket"));
      //加上otacode等参数
      // $("input[type=submit]").before($("#comm"));
+      $("input[name='category']").css("margin","5px 10px");
      
   })
 </script>
@@ -74,7 +75,7 @@
 </head>
 <body>
 
-<div calss="indiv">
+<div class="indiv">
     <input type="checkbox" name="category" value="#flightSearch"/>航班查询 
     <input type="checkbox" name="category" value="#calculateTrip" />计算税费
     <input type="checkbox" name="category" value="#createReservation"  />创建订单 

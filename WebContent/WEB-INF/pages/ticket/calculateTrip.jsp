@@ -10,7 +10,9 @@
 </head>
 <body>
 
-<h2>计算税费 </h2> 
+	<div align="center">
+		<h2>计算税费</h2>
+	</div>
 
 <h3>单程</h3>
 <form action="${pageContext.request.contextPath}/<%=calculateTrip %>" method="post">

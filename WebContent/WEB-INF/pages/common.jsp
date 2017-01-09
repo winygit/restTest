@@ -5,6 +5,7 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.8.0.min.js"></script>
 <!-- 
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
  -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/locale/easyui-lang-zh_CN.js"></script>
@@ -19,11 +20,11 @@
 </script>
 
 <style type="text/css">
- input {margin:5px 10px;}
+ input {margin:0px 10px; padding:2px}
  body  { margin:0 auto;font-size:15px}
  table {border-collapse:collapse;}
  th, td  {border: solid 1px #a0c6e5; height: 20px; padding:6px;}
  
  from {margin:0 auto;}
- select{margin:0px 10px; width:70px;height: 25px;}
+ select{margin:0px 10px; width:80px;height: 30px;}
 </style>

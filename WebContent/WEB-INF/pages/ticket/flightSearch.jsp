@@ -48,6 +48,10 @@
 		return date.getFullYear() + '-' +month  +'-' + day;
 	}
 	
+	$('#box').datebox('calendar').calendar({
+firstDay : 1,
+});
+	
 	function tripClick()
 	{
 	  // alert($("#ddd").datebox('getValue'));
@@ -74,7 +78,7 @@
 </head>
 <body>
 <div align="center">
-		<h3>航班查询</h3>
+		<h2>航班查询</h2>
 	</div>
 	<div>
 		<form action="${pageContext.request.contextPath}/new/<%=searchTrips%>" method="post">
@@ -88,7 +92,7 @@
 				<input  name="destination" class="placeSelect" />
 				 </li>
 				 
-				<li>出发时间 <input class="easyui-datebox" style="width: 200px"  
+				<li>出发时间 <input class="easyui-datebox"   
 					 name="date" data-options="formatter: format"></li>
 		 			
 				<li>成人 <input name="adtNum" class="traNum" value="1"> 

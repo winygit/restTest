@@ -106,8 +106,6 @@ public class OTaRestController {
 
     @RequestMapping("/main")
     public ModelAndView backmain(ModelAndView mav) {
-
-        System.out.println("99999999999");
         mav.setViewName("ticketRest");
         return mav;
     }

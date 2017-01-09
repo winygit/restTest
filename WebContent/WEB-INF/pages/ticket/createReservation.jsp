@@ -82,20 +82,23 @@ function setTraveler (index,lName,fName,mobilePhoneNumber,dateOfBirth,documentTy
 </script>
 </head>
 <body>
-	<h3>创建订单</h3>
+	<div align="center">
+		<h2>创建订单</h2>
+	</div>
 	<form  action="${pageContext.request.contextPath}/new/<%=createReservation%>"  method="post">
 	    <p>
-	    tripId<input type="text" name="tripOptionId"  ></input>
+	    <span style="margin:0px 20px 0px 0px; font-weight:bold;">tripId</span>
+	    <input type="text" name="tripOptionId"  ></input>
 	    <input type="hidden" name="login" value=${sessionScope.login}></input>
 	    </p>
 	    
 	    <p>
-	       乘机人<br />
+	       <h3>乘机人</h3>
 		<c:forEach begin="1" step="1" end="${sessionScope.adtNum}" var="adt"
 			varStatus="status">
 		第 ${status.index} 位成人：
 			<ul>
-				<li><select  onchange="traAdtSel(this,'${status.index-1}')" style="width: 80px; color:red;font-style:bold">
+				<li><select  onchange="traAdtSel(this,'${status.index-1}')" style="width: 80px; color:red;font-weight:blod;">
 				        <option value="">手动输入</option>
 						<option value="1">成人一</option>
 						<option value="2">成人二</option>
@@ -133,7 +136,7 @@ function setTraveler (index,lName,fName,mobilePhoneNumber,dateOfBirth,documentTy
 			varStatus="status">
 		第 ${status.index} 位儿童：
 			<ul>
-				<li><select  onchange="traCnnSel(this,'${status.index+sessionScope.adtNum-1}')" style="width: 80px; color:red;font-style:bold" >
+				<li><select  onchange="traCnnSel(this,'${status.index+sessionScope.adtNum-1}')" style="width: 80px; color:red;font-weight:blod;" >
 						<option value="">手动输入</option>
 						<option value="1">儿童一</option>
 						<option value="2">儿童二</option>
@@ -167,7 +170,7 @@ function setTraveler (index,lName,fName,mobilePhoneNumber,dateOfBirth,documentTy
 			varStatus="status">
 		第 ${status.index} 位婴儿：
 			<ul>
-				<li><select onchange="traInfSel(this,'${status.index+sessionScope.adtNum+sessionScope.cnnNum-1}')"  style="width: 80px; color:red;font-style:bold">
+				<li><select onchange="traInfSel(this,'${status.index+sessionScope.adtNum+sessionScope.cnnNum-1}')"  style="width: 80px; color:red;font-weight:blod;">
 						<option value="">手动输入</option>
 						<option value='1'>婴儿一</option>
 						<option value='2'>婴儿二</option>
@@ -199,7 +202,7 @@ function setTraveler (index,lName,fName,mobilePhoneNumber,dateOfBirth,documentTy
 		</c:forEach>
 		</p>
 		<p>
-		联系人
+		<h3>联系人</h3>
 		<ul>
 		<li>
 		  <input name="customer.code"  value="ADT"  type="hidden"/>

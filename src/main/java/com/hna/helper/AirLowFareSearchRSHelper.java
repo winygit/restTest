@@ -5,13 +5,11 @@ package com.hna.helper;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 
 import com.hna.tdp.model.AirLowFareSearchRSMo;
-import com.hna.tdp.model.EntryMo;
 import com.hna.tdp.model.FareFamilyMo;
 import com.hna.tdp.model.FlightInformationAttributeMo;
 import com.hna.tdp.model.FlightInformationMo;
@@ -131,15 +129,18 @@ public class AirLowFareSearchRSHelper {
             FareFamilyMo ffMo=flightItineraryPriceVo.getPriceVo().getFareFamily();
             tripSegment.setFarefamilyName(ffMo.getName().get("Entry").get(in).getValue());
             // 退改规则
-            StringBuffer ffBuffer = new StringBuffer();
-            List<Map<String, List<EntryMo>>> attributes = ffMo.getAttribute();
-            for (Map<String, List<EntryMo>> attr : attributes)
-            {
-                ffBuffer.append(attr.get("Entry").get(in).getValue());// .append("<br/>");
-                
-            }
+            // StringBuffer ffBuffer = new StringBuffer();
+            // List<Map<String, List<EntryMo>>> attributes =
+            // ffMo.getAttribute();
+            // for (Map<String, List<EntryMo>> attr : attributes)
+            // {
+            // ffBuffer.append(attr.get("Entry").get(in).getValue());//
+            // .append("<br/>");
+            //
+            // }
             
-            tripSegment.setFfAttribute(ffBuffer.toString().replace("\'", "").replace("\"", ""));
+            // tripSegment.setFfAttribute(ffBuffer.toString().replace("\'",
+            // "").replace("\"", ""));
 
             // 票面价
             tripSegment.setBaseFareAmount(

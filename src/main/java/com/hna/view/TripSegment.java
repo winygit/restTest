@@ -165,5 +165,4 @@ public class TripSegment {
         this.cabinClass = cabinClass;
     }
 
-
 }

@@ -74,7 +74,7 @@
 </head>
 <body>
 
-<div calss="indiv">
+<div class="indiv">
     <input type="checkbox" name="category" value="#p1t1"  />单人单程   
     <input type="checkbox" name="category" value="#p1t2" />单人往返
     <input type="checkbox" name="category" value="#pnt1"  />多人单程  

@@ -55,7 +55,9 @@ function recall()
 		var params2 = params1.replace(new RegExp(",", "g"), "&");
 		//console.log(params2);
 
+		//var url = '${pageContext.request.contextPath}'+"${serviceResult.method}".substr(4) + "?" + params2;
 		var url = "${serviceResult.method}".substr(4) + "?" + params2;
+		
 		//去掉换行和空格
 		var url2 = url.replace(/\s/g, "").replace(/[\r\n]/g,"");
 		//console.log(url2);
@@ -84,7 +86,7 @@ function recall()
 	    <textarea rows="5" cols="100" id="params" >  ${serviceResult.params} </textarea> 
 	    </li>
 	    <li> <button onmousedown="recall()"> 再次提交 </button> </li>
-	    <li><p>返回状态码:${serviceResult.code}  &nbsp;&nbsp;   响应时间:${serviceResult.respondTime}ms</p></li>
+	    <li>返回状态码:${serviceResult.code}  &nbsp;&nbsp;   响应时间:${serviceResult.respondTime}ms</li>
 	 </ul>
    </div>
 	 
@@ -98,7 +100,7 @@ function recall()
 					<c:otherwise>
 						<jsp:include page="${serviceResult.resultJsp}" />
 						<p>
-					     <button onmousedown="getOriginalJson()">查看原始json</button> 
+					     <button onmousedown="getOriginalJson()">查看原始json</button> &nbsp;&nbsp; 
 					      <button style="margin:0  50;" onmousedown="backtomain()">回主页</button>
 					    </p>
 					</c:otherwise>

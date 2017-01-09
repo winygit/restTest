@@ -23,7 +23,6 @@ import com.hna.model.requestFormValue.TripSearchFv;
 import com.hna.model.requestRestValue.CreateReservationRv;
 import com.hna.model.requestRestValue.TripsSearchRv;
 import com.hna.response.ServiceResult;
-import com.hna.service.ConfigSevice;
 import com.hna.service.HttpService;
 import com.hna.tdp.model.AirLowFareSearchRSMo;
 import com.hna.tdp.value.AirLowFareSearchRSVo;
@@ -40,8 +39,6 @@ public class OTaRestControllerN {
     private AirLowFareSearchRSHelper airSearchhelper;
 
 
-    @Autowired
-    private ConfigSevice configSevice;
     @Autowired
     private TripsSearchMapper tripsSearchMapper;
     @Autowired
@@ -109,15 +106,20 @@ public class OTaRestControllerN {
     @RequestMapping(value = { "/create-reservation", "/createReservation" })
     public ModelAndView createReservationN(HttpServletRequest request, ModelAndView mav, CreateReservationFv fv) {
 
-        CreateReservationRv rv = createReservationMapper.mapper(fv);
-        Map<String, Object> requestParams = createReservationMapper.mapperToRequestMap(rv);
         // 1.获取数据
         OtaConfig otaConfig = (OtaConfig) request.getSession().getAttribute("otaconfig");
         if (otaConfig == null) {
             mav.setViewName("login");
             return mav;
         }
-        ServiceResult serviceResult = getJsonData(request, requestParams, otaConfig);
+        ServiceResult serviceResult = new ServiceResult();
+        if (request.getMethod().equals("POST")) {
+            CreateReservationRv rv = createReservationMapper.mapper(fv);
+            Map<String, Object> requestParams = createReservationMapper.mapperToRequestMap(rv);
+            serviceResult = getJsonData(request, requestParams, otaConfig);
+        } else {
+            serviceResult = getJsonDataByRequest(request, otaConfig);
+        }
 
         // 2.在页面显示
         mav.addObject("serviceResult", serviceResult);

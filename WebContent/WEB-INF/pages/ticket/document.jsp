@@ -9,12 +9,14 @@
 <script type="text/javascript"> 
  function drSubmit()
  {
-      alert("出票成功后,请注意及时退票！")
+      alert(" 为避免座位虚耗,测试完成后请及时退票! ");
  }
 </script>
 </head>
 <body>
-<h2>出票</h2>
+	<div align="center">
+		<h2>出 票</h2>
+	</div>
 <!-- 
 <h3>验证票价是否合理</h3>
 <div>

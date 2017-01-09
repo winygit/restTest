@@ -21,7 +21,7 @@
 <body>
 <div>
  <h3>费用信息 </h3>
- url：${trip.uri}
+ tripId(创建订单参数):${trip.uri}
  <hr/>
  总费用：${tripCalculation.totalFareAmount}
  <table >

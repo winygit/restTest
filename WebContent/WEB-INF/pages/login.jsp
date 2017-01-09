@@ -54,7 +54,6 @@
 			<center><input type="submit" id="submit" value="登   录"></center>
 		</fieldset>
 	</form>
-
 </div>
 </body>
 </html>

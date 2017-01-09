@@ -8,7 +8,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h2>查询</h2>
+	<div align="center">
+		<h2>订单查询</h2>
+	</div>
 <h3>订单列表</h3>
 <form action="${pageContext.request.contextPath}/app/queryOrder.do" method="post">
 订单号(非必填)<input type="text" name="reservationCode"  value=""></input>
