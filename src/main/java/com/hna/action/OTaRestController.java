@@ -179,6 +179,32 @@ public class OTaRestController {
 
     }
 
+    @RequestMapping("/login2")
+    public ModelAndView loginNoTest(HttpServletRequest request, ModelAndView mav) {
+        String env = "uat";
+        String otaCode = "mobile";
+        if (!StringUtils.isEmpty(request.getParameter("env"))) {
+            env = request.getParameter("env").trim();
+        }
+        if (!StringUtils.isEmpty(request.getParameter("otaCode"))) {
+            otaCode = request.getParameter("otaCode").trim();
+        }
+        log.debug("env:{}  ota: {}", env, otaCode);
+
+        OtaConfig config = configSevice.getOtaConfig(env, otaCode);
+
+        // 放入session
+        request.getSession(true).setAttribute("otaconfig", config);
+        request.getSession(true).setAttribute("userId", "admin");
+        request.getSession(true).setAttribute("userName", "admin");
+        request.getSession(true).setAttribute("env", env);
+        request.getSession(true).setAttribute("ota", otaCode);
+
+        mav.setViewName("ticketRest");
+
+        return mav;
+    }
+
     @RequestMapping(value = { "/calculateTrip", "calculate-trip" })
     public ModelAndView TripCalculation(HttpServletRequest request, ModelAndView mav) {
         // 1.获取json数据

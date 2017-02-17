@@ -15,22 +15,22 @@ function traAdtSel(sel,i)
     //alert(i+"--"+this.value());
 	switch (sel.value) {
 		case "1":
-		    setTraveler(i,"Test","adtA","15527209215","1993-04-05","ID_CARD","413026199304055419","2999-10-11");
+		    setTraveler(i,"Test","adtA","15527209215","1993-04-05","ID_CARD","413026199304055419","2999-10-11","CN","WUHAN");
 			break;
 		case "2":
-		     setTraveler(i,"Test","adtB","15527209215","1998-09-09","MI_CARD","987110488","2999-10-11");
+		     setTraveler(i,"Test","adtB","15527209215","1998-09-09","MI_CARD","987110488","2999-10-11","CN","WUHAN");
 			break;
 		case "3":
-		     setTraveler(i,"Test","adtC","15565457899","1992-03-28","ID_CARD","231026199203285519","2999-10-11");
+		     setTraveler(i,"Test","adtC","15565457899","1992-03-28","ID_CARD","231026199203285519","2999-10-11","CN","WUHAN");
 			break;
 		case "4":
-		    setTraveler(i,"Test","adtD","15512345678","1999-09-28","OTHER_ID","654321","2999-10-11");
+		    setTraveler(i,"Test","adtD","15512345678","1999-09-28","OTHER_ID","654321","2999-10-11","CN","WUHAN");
 			break;
 		case "5":
-		    setTraveler(i,"Test","adtE","15527209215","1990-09-09","2.DOC","98765412","2999-10-11");
+		    setTraveler(i,"Test","adtE","15527209215","1990-09-09","2.DOC","98765412","2999-10-11","CN","WUHAN");
 			break;
 		default:
-		    setTraveler(i,"","","","","ID_CARD","","");
+		    setTraveler(i,"","","","","ID_CARD","","","","");
 		    break;
 		}
 }
@@ -39,16 +39,16 @@ function traCnnSel(sel,i)
 {
 	switch (sel.value) {
 		case "1":
-		    setTraveler(i,"Test","cnnA","15527209215","2010-08-08","ID_CARD","421181201008087635","2999-10-11");
+		    setTraveler(i,"Test","cnnA","15527209215","2010-08-08","ID_CARD","421181201008087635","2999-10-11","CN","WUHAN");
 			break;
 		case "2":
-		    setTraveler(i,"Test","cnnB","15598765432","2008-08-08","OTHER_ID","480249320090","2999-10-11");
+		    setTraveler(i,"Test","cnnB","15598765432","2008-08-08","OTHER_ID","480249320090","2999-10-11","CN","WUHAN");
 			break;
 		case "3":
-		    setTraveler(i,"Test","cnnC","15565457899","2007-07-02","ID_CARD","510304200707025825","2999-10-11");
+		    setTraveler(i,"Test","cnnC","15565457899","2007-07-02","ID_CARD","510304200707025825","2999-10-11","CN","WUHAN");
 			break;
 		default:
-		      setTraveler(i,"","","","","ID_CARD","","");
+		      setTraveler(i,"","","","","ID_CARD","","","","");
 		      break;
 		}
 }
@@ -57,18 +57,18 @@ function traInfSel(sel,i)
 {
 	switch (sel.value) {
 		case "1":
-		    setTraveler(i,"Test","infA","15527209215","2016-08-08","MI_CARD","135790","2999-10-11");
+		    setTraveler(i,"Test","infA","15527209215","2016-08-08","MI_CARD","135790","2999-10-11","CN","WUHAN");
 			break;
 		case "2":
-		    setTraveler(i,"Test","infB","15527209258","2015-10-18","OTHER_ID","24680","2999-10-11");
+		    setTraveler(i,"Test","infB","15527209258","2015-10-18","OTHER_ID","24680","2999-10-11","CN","WUHAN");
 			break;
 		default:
-		    setTraveler(i,"","","","","ID_CARD","","");
+		    setTraveler(i,"","","","","ID_CARD","","","","");
 		    break;
 		}
 }
 
-function setTraveler (index,lName,fName,mobilePhoneNumber,dateOfBirth,documentType,documentNumber,documentExpirationDate)
+function setTraveler (index,lName,fName,mobilePhoneNumber,dateOfBirth,documentType,documentNumber,documentExpirationDate,citizenship,placeOfBirth)
 {
              $("input[name='traveler["+index+"].lName'").val(lName) ;  
              $("input[name='traveler["+index+"].fName'").val(fName) ;  
@@ -77,17 +77,21 @@ function setTraveler (index,lName,fName,mobilePhoneNumber,dateOfBirth,documentTy
              $("select[name='traveler["+index+"].documentType'").val(documentType) ;
              $("input[name='traveler["+index+"].documentNumber'").val(documentNumber) ;  
              $("input[name='traveler["+index+"].documentExpirationDate'").val(documentExpirationDate) ; 
+             
+             $("input[name='traveler["+index+"].citizenship'").val(citizenship) ;
+             $("input[name='traveler["+index+"].placeOfBirth'").val(placeOfBirth) ;
+              
 }
 
 </script>
 </head>
-<body>
+<body >
 	<div align="center">
 		<h2>创建订单</h2>
 	</div>
 	<form  action="${pageContext.request.contextPath}/new/<%=createReservation%>"  method="post">
 	    <p>
-	    <span style="margin:0px 20px 0px 0px; font-weight:bold;">tripId</span>
+	    <span style="margin:0px 20px 0px 0px; font-weight:bold;" >tripId</span>
 	    <input type="text" name="tripOptionId"  ></input>
 	    <input type="hidden" name="login" value=${sessionScope.login}></input>
 	    </p>
@@ -120,14 +124,21 @@ function setTraveler (index,lName,fName,mobilePhoneNumber,dateOfBirth,documentTy
 					</select>
 					证件号<input
 					name="traveler[${status.index-1}].documentNumber" ></input>
-				         证件有效期<input
+				         有效期<input
 					name="traveler[${status.index-1}].documentExpirationDate" ></input> 
-					<input title="证件签发国" type="hidden" name="traveler[${status.index-1}].documentCountry"
+					签发国<input title="证件签发国" type="text" name="traveler[${status.index-1}].documentCountry"
 					value="CN"></input>
 				</li>
 				<li>
 				出生日期<input name="traveler[${status.index-1}].dateOfBirth"></input> 
 				手机号<input name="traveler[${status.index-1}].mobilePhoneNumber"	></input>
+				</li>
+				<li>
+				citizenship<input name="traveler[${status.index-1}].citizenship"></input> 
+				<!--  出生地可以不输
+				placeOfBirth<input name="traveler[${status.index-1}].placeOfBirth"></input>
+				 -->
+				性别<input name="traveler[${status.index-1}].gender"></input>
 				</li>
 			</ul>
 		</c:forEach>
@@ -155,13 +166,18 @@ function setTraveler (index,lName,fName,mobilePhoneNumber,dateOfBirth,documentTy
 					    <option value="OTHER_ID">其他</option>
 					</select> 
 					证件号<input name="traveler[${status.index+sessionScope.adtNum-1}].documentNumber" />
-				         证件有效期<input name="traveler[${status.index+sessionScope.adtNum-1}].documentExpirationDate" /> 
-					<input title="证件签发国" type="hidden" name="traveler[${status.index+sessionScope.adtNum-1}].documentCountry"
+				         有效期<input name="traveler[${status.index+sessionScope.adtNum-1}].documentExpirationDate" /> 
+					签发国<input title="证件签发国" type="text" name="traveler[${status.index+sessionScope.adtNum-1}].documentCountry"
 					value="CN"/>
 				</li>
 				<li>
 				出生日期<input name="traveler[${status.index+sessionScope.adtNum-1}].dateOfBirth"/>
 				手机号<input name="traveler[${status.index+sessionScope.adtNum-1}].mobilePhoneNumber"/>
+				</li>
+					<li>
+				citizenship<input name="traveler[${status.index+sessionScope.adtNum-1}].citizenship"></input> 
+				placeOfBirth<input name="traveler[${status.index+sessionScope.adtNum-1}].placeOfBirth"></input>
+				性别<input name="traveler[${status.index+sessionScope.adtNum-1}].gender"></input>
 				</li>
 			</ul>
 		</c:forEach>
@@ -189,14 +205,19 @@ function setTraveler (index,lName,fName,mobilePhoneNumber,dateOfBirth,documentTy
 					</select> 
 					证件号<input
 					name="traveler[${status.index+sessionScope.adtNum+sessionScope.cnnNum-1}].documentNumber"></input>
-				         证件有效期<input
+				         有效期<input
 					name="traveler[${status.index+sessionScope.adtNum+sessionScope.cnnNum-1}].documentExpirationDate" /> 
-					<input title="证件签发国" type="hidden" name="traveler[${status.index+sessionScope.adtNum+sessionScope.cnnNum-1}].documentCountry"
+					签发国<input title="证件签发国" type="text" name="traveler[${status.index+sessionScope.adtNum+sessionScope.cnnNum-1}].documentCountry"
 					value="CN"></input>
 				</li>
 				<li>
 				出生日期<input name="traveler[${status.index+sessionScope.adtNum+sessionScope.cnnNum-1}].dateOfBirth"/> 
 				手机号<input name="traveler[${status.index+sessionScope.adtNum+sessionScope.cnnNum-1}].mobilePhoneNumber"/>
+				</li>
+					<li>
+				citizenship<input name="traveler[${status.index+sessionScope.adtNum+sessionScope.cnnNum-1}].citizenship"></input> 
+				placeOfBirth<input name="traveler[${status.index+sessionScope.adtNum+sessionScope.cnnNum-1}].placeOfBirth"></input>
+				性别<input name="traveler[${status.index+sessionScope.adtNum+sessionScope.cnnNum-1}].gender"></input>
 				</li>
 			</ul>
 		</c:forEach>

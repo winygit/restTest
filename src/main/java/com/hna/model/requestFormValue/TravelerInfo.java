@@ -22,6 +22,10 @@ public class TravelerInfo {
     private String documentCountry;
     private String documentExpirationDate;
 
+    private String citizenship;
+    // private String placeOfBirth;
+    private String gender;
+
     public String getCode() {
         return code;
     }
@@ -94,12 +98,37 @@ public class TravelerInfo {
         this.documentExpirationDate = documentExpirationDate;
     }
 
+    public String getCitizenship() {
+        return citizenship;
+    }
+
+    public void setCitizenship(String citizenship) {
+        this.citizenship = citizenship;
+    }
+
+    // public String getPlaceOfBirth() {
+    // return placeOfBirth;
+    // }
+    //
+    // public void setPlaceOfBirth(String placeOfBirth) {
+    // this.placeOfBirth = placeOfBirth;
+    // }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
     @Override
     public String toString() {
         return "code:" + code + ";fName:" + fName + ";lName:" + lName + ";mobilePhone.number:" + mobilePhoneNumber
                 + ";dateOfBirth:" + dateOfBirth + ";document.type:" + documentType + ";document.number:"
                 + documentNumber + ";document.country:" + documentCountry + ";document.expirationDate:"
-                + documentExpirationDate;
+                + documentExpirationDate + ";citizenship:" + citizenship + ";gender:"
+                + gender;
     }
 
 }

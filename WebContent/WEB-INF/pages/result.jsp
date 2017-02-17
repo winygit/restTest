@@ -30,10 +30,11 @@ function backtomain()
 
 function getOriginalJson()
 {
-
+  
   // $('#parsedData').empty();
    $('#parsedData').hide();
    $('#jsonData').show();
+   
 }
 
 function parsedData()
@@ -108,7 +109,9 @@ function recall()
 			</div>
 
 			<div id="jsonData" >
+			    <p>
 				${serviceResult.result}
+				</p>
 				<p>
 				   <button onmousedown="parsedData()">返回</button> 
 				</p>

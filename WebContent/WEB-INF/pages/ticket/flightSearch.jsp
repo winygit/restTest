@@ -19,16 +19,10 @@
    
     $('#returnDate').hide();
     
-    $(".placeSelect").combobox({
-     valueField: 'code',
-     textField: 'name',
-	 data :HNA_FLIGHT_CITIES,
-	
-	});
-	
+  
 	$(".traNum").numberbox({
 	  min: 0,
-	  max: 5,
+	  max: 6,
 	  suffix:'位',
 	})
 	
@@ -37,21 +31,7 @@
 	
 </script>
 <script type="text/javascript">
-	function format(date) {
-		//alert(date);
-		//return   date.getFullYear() + '-' + date.getMonth() +'-' + date.getDate();
-		 //alert($("#ddd").datebox('getValue'));
-		var month=date.getMonth()+1;
-		var day=date.getDate();
-		month=(month<10)?'0'+month:month;
-		day=(day<10)?'0'+day:day;
-		return date.getFullYear() + '-' +month  +'-' + day;
-	}
-	
-	$('#box').datebox('calendar').calendar({
-firstDay : 1,
-});
-	
+
 	function tripClick()
 	{
 	  // alert($("#ddd").datebox('getValue'));
@@ -85,15 +65,15 @@ firstDay : 1,
 			<ul>
 				<li>出发地 
 				
-				<input  name="origin" class="placeSelect" />
+				<input  name="origin"  type="text"/>
 				</li>
 				<li>
 				 目的地 
-				<input  name="destination" class="placeSelect" />
+				<input  name="destination" type="text" />
 				 </li>
 				 
-				<li>出发时间 <input class="easyui-datebox"   
-					 name="date" data-options="formatter: format"></li>
+				<li>出发时间 <input 
+					 name="date" type="text"  id="date1"></li>
 		 			
 				<li>成人 <input name="adtNum" class="traNum" value="1"> 
 				          儿童 <input name="cnnNum" class="traNum" value="0"> 
@@ -103,8 +83,8 @@ firstDay : 1,
 				<li>单程 <input type="radio"  onclick="tripClick()" name="trip" checked="checked" value="0">
 				          往返 <input type="radio"  onclick="tripClick()" name="trip" value="1" >
 				</li>	
-					 <li ><div id="returnDate">返程时间 <input class="easyui-datebox" 
-					 name="returnDate" data-options="formatter: format"> </div></li>
+					 <li ><div id="returnDate">返程时间 <input  
+					 name="returnDate" type="text"> </div></li>
 
 				<li>固定日期 <input type="radio" name="flexible" value="false">是
 						<input type="radio" name="flexible" value="true" checked="checked">否
