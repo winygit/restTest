@@ -17,7 +17,7 @@ public class TaskJob {
     }
 
     public void job1() {
-        System.out.println("lll");
+        System.out.println("lllooo");
         System.out.println("基于XML的任务。。" + new Date());
     }
 }
