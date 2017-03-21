@@ -5,8 +5,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,7 +32,7 @@ import com.hna.view.TripSegment;
 @Controller
 public class OTaRestControllerN {
 
-    private Logger log = LoggerFactory.getLogger(OTaRestControllerN.class);
+    // private Logger log = LoggerFactory.getLogger(this.getClass());
     @Autowired
     private AirLowFareSearchRSHelper airSearchhelper;
 
@@ -45,7 +43,6 @@ public class OTaRestControllerN {
     private CreateReservationMapper createReservationMapper;
     @Autowired
     private HttpService httpService;
-
 
     private Gson gson = new Gson();
 
@@ -127,8 +124,6 @@ public class OTaRestControllerN {
         return mav;
 
     }
-
-
 
 
     public ServiceResult getJsonDataByRequest(HttpServletRequest request, OtaConfig otaConfig) {

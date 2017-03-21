@@ -1,6 +1,7 @@
 package com.hna.action;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -16,21 +17,38 @@ import org.springframework.util.StringUtils;
 @WebFilter(value = { "/api/*", "/app/*" })
 public class webFilter implements Filter {
 
+    // private Logger log = LoggerFactory.getLogger(this.getClass());
     public webFilter() {
     }
 
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        //
-        // System.out.println("检查登录！！！");
+
+        // log.debug("-----login Filter-----");
+        // log.error("----test---");
         HttpServletRequest httpRequest = (HttpServletRequest) request;
-        // 未登录 ，先去登录. 登录接口不检查
-        boolean flag = httpRequest.getServletPath().contains("/login");
+        // 无需登录的接口
+        // String[] whiteStrs = { "/login", "/pnrinfo", "/tktinfo" };
+        String[] whiteStrs = { "/login" };
+        // 检查是否需要登录
+        boolean flag = false;
+        for (String str : Arrays.asList(whiteStrs))
+        {
+            if (httpRequest.getServletPath().contains(str)) {
+                flag = true;
+                break;
+            }
+        }
+        // boolean flag = httpRequest.getServletPath().contains("/login");
+
         if (!flag && StringUtils.isEmpty(httpRequest.getSession().getAttribute("login"))) {
             request.setAttribute("loginRs", "请先登录");
             request.getRequestDispatcher("/index.jsp").forward(request, response);
             return;
         }
         // 登录成功，放行
+        // log.debug("{}-{} 通过login过滤器...",
+        // httpRequest.getSession().getAttribute("userId"),
+        // httpRequest.getSession().getAttribute("userName"));
         chain.doFilter(request, response);
 	}
 

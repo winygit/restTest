@@ -20,8 +20,6 @@ import org.apache.commons.httpclient.params.HttpClientParams;
 import org.apache.commons.httpclient.params.HttpConnectionManagerParams;
 import org.apache.commons.httpclient.params.HttpMethodParams;
 import org.apache.commons.io.IOUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -32,7 +30,8 @@ import com.hna.service.ConfigSevice;
 @Component
 public class HttpClientUtil {
 
-    private static Logger log = LoggerFactory.getLogger(HttpClientUtil.class);
+    // private static Logger log =
+    // LoggerFactory.getLogger(HttpClientUtil.class);
 
     private static final HttpClient httpClient;
 
@@ -68,7 +67,7 @@ public class HttpClientUtil {
         try {
             postMethod = new PostMethod(url);
             postMethod.setRequestHeader("Accept", "application/json");
-            log.debug("Call  URL:  " + url);
+            // log.debug("Call URL: " + url);
             if (params != null && params.size() > 0) {
                 for (String key : params.keySet()) {
                     Object values = params.get(key);
@@ -99,7 +98,7 @@ public class HttpClientUtil {
             serviceResult.setCode(statusCode);
 
             if (statusCode != HttpStatus.SC_OK) {
-                log.error("Method failed: " + postMethod.getStatusLine());
+                // log.error("Method failed: " + postMethod.getStatusLine());
                 serviceResult.setResult(postMethod.getResponseBodyAsString());
                // return postMethod.getStatusLine();
             }
@@ -108,7 +107,7 @@ public class HttpClientUtil {
             serviceResult.setResult(response);
            // return response;
         } catch (Exception e) {
-            log.error("Send Post error:  ", e);
+            // log.error("Send Post error: ", e);
             serviceResult.setResult(e.getMessage());
            // return null;
         } finally {
@@ -145,7 +144,7 @@ public class HttpClientUtil {
         PostMethod postMethod = null;
         try {
             postMethod = new PostMethod(url);
-            log.debug("Call  URL:  " + url);
+            // log.debug("Call URL: " + url);
 
             Map<String, String[]> parameters = request.getParameterMap();
             for (Map.Entry<String, String[]> entry : parameters.entrySet()) {
@@ -161,7 +160,7 @@ public class HttpClientUtil {
                 }
 
                 for (String value : values) {
-                    log.debug("{}:{}", name, value);
+                    // log.debug("{}:{}", name, value);
                     postMethod.addParameter(new NameValuePair(name, value.trim()));
                     params.add(name + "=" + value);
 
@@ -170,19 +169,19 @@ public class HttpClientUtil {
 
             // 添加必须的访问参数
             if (!parameters.keySet().contains("OTACode")) {
-                log.debug("{}:{}", "OTACode", otaConfig.getOTACode());
+                // log.debug("{}:{}", "OTACode", otaConfig.getOTACode());
                 postMethod.addParameter(new NameValuePair("OTACode", otaConfig.getOTACode()));
                 params.add("OTACode=" + otaConfig.getOTACode());
             }
 
             if (!parameters.keySet().contains("timestamp")) {
-                log.debug("{}:{}", "timestamp", otaConfig.getTimestamp());
+                // log.debug("{}:{}", "timestamp", otaConfig.getTimestamp());
                 postMethod.addParameter(new NameValuePair("timestamp", otaConfig.getTimestamp()));
                 params.add("timestamp=" + otaConfig.getTimestamp());
             }
 
             if (!parameters.keySet().contains("token")) {
-                log.debug("{}:{}", "token", otaConfig.getToken());
+                // log.debug("{}:{}", "token", otaConfig.getToken());
                 postMethod.addParameter(new NameValuePair("token", otaConfig.getToken()));
                 params.add("token=" + otaConfig.getToken());
             }
@@ -197,7 +196,7 @@ public class HttpClientUtil {
             serviceResult.setCode(statusCode);
 
             if (statusCode != HttpStatus.SC_OK) {
-                log.error("Method failed: " + postMethod.getStatusLine());
+                // log.error("Method failed: " + postMethod.getStatusLine());
                 // serviceReult.setResult(
                 // "Method failed: " + postMethod.getStatusLine() + " " +
                 // postMethod.getResponseBodyAsString());
@@ -205,10 +204,10 @@ public class HttpClientUtil {
             }
 
             String response = IOUtils.toString(postMethod.getResponseBodyAsStream(), "UTF-8");
-            // log.debug(response);
+            // //log.debug(response);
             serviceResult.setResult(response);
         } catch (Exception e) {
-            log.error(" RUL: " + url + ",Send Post error:  ", e);
+            // log.error(" RUL: " + url + ",Send Post error: ", e);
             serviceResult.setResult("Error: " + e.getLocalizedMessage());
         } finally {
             // 释放连接

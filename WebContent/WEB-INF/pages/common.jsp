@@ -27,4 +27,6 @@
  
  from {margin:0 auto;}
  select{margin:0px 10px; width:80px;height: 30px;}
+ 
+ ol li{margin:10px 5px;}
 </style>

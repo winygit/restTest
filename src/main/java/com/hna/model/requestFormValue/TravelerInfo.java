@@ -3,6 +3,10 @@
  */
 package com.hna.model.requestFormValue;
 
+import java.lang.reflect.Field;
+
+import org.springframework.util.StringUtils;
+
 /**
  *<p>
  *
@@ -124,11 +128,34 @@ public class TravelerInfo {
 
     @Override
     public String toString() {
-        return "code:" + code + ";fName:" + fName + ";lName:" + lName + ";mobilePhone.number:" + mobilePhoneNumber
-                + ";dateOfBirth:" + dateOfBirth + ";document.type:" + documentType + ";document.number:"
-                + documentNumber + ";document.country:" + documentCountry + ";document.expirationDate:"
-                + documentExpirationDate + ";citizenship:" + citizenship + ";gender:"
-                + gender;
+        // return "code:" + code + ";fName:" + fName + ";lName:" + lName +
+        // ";mobilePhone.number:" + mobilePhoneNumber
+        // + ";dateOfBirth:" + dateOfBirth + ";document.type:" + documentType +
+        // ";document.number:"
+        // + documentNumber + ";document.country:" + documentCountry +
+        // ";document.expirationDate:"
+        // + documentExpirationDate + ";citizenship:" + citizenship + ";gender:"
+        // + gender;
+        Field[] declaredFields = this.getClass().getDeclaredFields();
+        StringBuilder sb = new StringBuilder();
+
+        for (Field field : declaredFields) {
+            try {
+                if (!StringUtils.isEmpty(field.get(this))) {
+                    sb.append(field.getName() + ":" + field.get(this) + ";");
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        if (!StringUtils.isEmpty(sb.toString())) {
+            String str = sb.toString().substring(0, sb.length() - 1);
+            return str.replace("documentType", "document.type").replace("mobilePhoneNumber", "mobilePhone.number")
+                    .replace("documentNumber", "document.number").replace("documentCountry", "document.country")
+                    .replace("documentExpirationDate", "document.expirationDate");
+        }
+        return null;
     }
 
 }

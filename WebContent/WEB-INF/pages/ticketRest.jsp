@@ -76,12 +76,13 @@
 <body>
 
 <div class="indiv">
-    <input type="checkbox" name="category" value="#flightSearch"/>航班查询 
+    <input type="checkbox" name="category" value="#flightSearch" />航班查询 
     <input type="checkbox" name="category" value="#calculateTrip" />计算税费
     <input type="checkbox" name="category" value="#createReservation"  />创建订单 
     <input type="checkbox" name="category" value="#document"  />出票
     <input type="checkbox" name="category" value="#query" />订单查询
     <input type="checkbox" name="category" value="#refund"  />退票
+     <input type="checkbox" name="category" value="#ibe"  />IBE
 </div>
 
 <!--***************************************************************-->
@@ -92,7 +93,7 @@
 <div id="document" class="indiv" title="出票"><%@ include file="ticket/document.jsp" %></div>
 <div id="query" class="indiv" title="查询"><%@ include file="ticket/query.jsp" %></div>
 <div id="refund" class="indiv" title="退票"><%@ include file="ticket/refund.jsp" %></div>
-
+<div id="ibe" class="indiv" title="IBE"><%@ include file="ibe.jsp" %></div>
 
 <!--***************************************************************-->
 <!--***************************************************************-->

@@ -3,6 +3,12 @@
  */
 package com.hna.model.requestFormValue;
 
+import java.lang.reflect.Field;
+
+import org.springframework.util.StringUtils;
+
+import com.hna.util.ClassToString;
+
 /**
  *<p>
  *
@@ -10,7 +16,7 @@ package com.hna.model.requestFormValue;
  * @author winy  
  * @date 2016年12月26日
  */
-public class CustomerInfo {
+public class CustomerInfo extends ClassToString {
 
     private String code;
     private String fName;
@@ -78,9 +84,36 @@ public class CustomerInfo {
 
     @Override
     public String toString() {
-        return "code:" + code + ";fName:" + fName + ";lName:" + lName + ";mobilePhone.number:" + mobilePhoneNumber
-                + ";email:" + email + ";userName:" + userName + ";userId:" + userId;
+        Field[] declaredFields = this.getClass().getDeclaredFields();
+        StringBuilder sb = new StringBuilder();
+
+        for (Field field : declaredFields) {
+            try {
+                if (!StringUtils.isEmpty(field.get(this))) {
+                sb.append(field.getName() + ":" + field.get(this) + ";");
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        if (!StringUtils.isEmpty(sb.toString())) {
+            String str = sb.toString().substring(0, sb.length() - 1);
+            return str.replace("mobilePhoneNumber", "mobilePhone.number");
+        }
+        return null;
+        // return "code:" + code + ";fName:" + fName + ";lName:" + lName +
+        // ";mobilePhone.number:" + mobilePhoneNumber
+        // + ";email:" + email + ";userName:" + userName + ";userId:" + userId;
     }
 
+    public static void main(String[] args) {
+        CustomerInfo test = new CustomerInfo();
+        test.setCode("oopp");
+        test.setEmail("winy@163.com");
+        test.setlName("test");
+        System.out.println(test);
+        System.out.println(test.getString(test));
+    }
 
 }

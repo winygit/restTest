@@ -40,7 +40,7 @@ import com.hna.view.TripSegment;
 @Controller
 public class OTaRestController {
 
-    private Logger log = LoggerFactory.getLogger(OTaRestController.class);
+    private Logger log = LoggerFactory.getLogger(this.getClass());
     @Autowired
     private AirLowFareSearchRSHelper airSearchhelper;
     @Autowired
@@ -94,7 +94,7 @@ public class OTaRestController {
     @RequestMapping("/{method}")
     public ModelAndView invokeRest(HttpServletRequest request, ModelAndView mav, @PathVariable String method) {
 
-        log.debug("-------invokeRest--{}-------", method);
+        //// log.debug("-------invokeRest--{}-------", method);
         // 1.获取json 数据
         ServiceResult serviceResult = getJsonData(request);
         // 2.在页面显示
@@ -124,21 +124,22 @@ public class OTaRestController {
         if (!StringUtils.isEmpty(request.getParameter("otaCode"))) {
             otaCode = request.getParameter("otaCode").trim();
         }
-        log.debug("env:{}  ota: {}", env, otaCode);
+        // log.debug("env:{} ota: {}", env, otaCode);
 
         OtaConfig config = configSevice.getOtaConfig(env, otaCode);
 
         /*
          * 登录
          */
+        try {
         String username = request.getParameter("username").trim();
 
         // ServiceResult serviceResult = getJsonDataNew(request,
         // configSevice.getLoginOtaConfig(env, otaCode));
         ServiceResult serviceResult = getJsonData(request);
         String jsonStr = RegexSwitch.switchForTDP(serviceResult.getResult());
-        if (!StringUtils.isEmpty(jsonStr)) {
-            try {
+
+                if (!StringUtils.isEmpty(jsonStr)) {
                 JsonElement rs = (JsonElement) GsonUtil.getElement(jsonStr, "success");
                 if (rs.getAsBoolean()) {
                     // 登录成功
@@ -161,13 +162,13 @@ public class OTaRestController {
                     return mav;
 
                 }
-            } catch (Exception e) {
-                log.debug("登录处理异常！ {}", e.getMessage());
-                mav.addObject("loginRs", "登录错误!");
-                mav.setViewName("login");
-
-                return mav;
             }
+        } catch (Exception e) {
+            // log.debug("登录处理异常！ {}", e.getMessage());
+            mav.addObject("loginRs", "登录错误!");
+            mav.setViewName("login");
+
+            return mav;
         }
 
         mav.addObject("loginRs", "登录名或者账号错误!");
@@ -189,7 +190,7 @@ public class OTaRestController {
         if (!StringUtils.isEmpty(request.getParameter("otaCode"))) {
             otaCode = request.getParameter("otaCode").trim();
         }
-        log.debug("env:{}  ota: {}", env, otaCode);
+        // log.debug("env:{} ota: {}", env, otaCode);
 
         OtaConfig config = configSevice.getOtaConfig(env, otaCode);
 
@@ -205,7 +206,7 @@ public class OTaRestController {
         return mav;
     }
 
-    @RequestMapping(value = { "/calculateTrip", "calculate-trip" })
+    @RequestMapping(value = { "/calculateTrip", "/calculate-trip" })
     public ModelAndView TripCalculation(HttpServletRequest request, ModelAndView mav) {
         // 1.获取json数据
         ServiceResult serviceResult = getJsonData(request);
@@ -285,7 +286,7 @@ public class OTaRestController {
 
         // 1.获取json数据
         ServiceResult serviceResult = getJsonData(request);
-        log.debug("json : {}", serviceResult.getResult());
+        // log.debug("json : {}", serviceResult.getResult());
         String jsonStr = RegexSwitch.switchForTDP(serviceResult.getResult());
 
         mav.addObject("serviceResult", serviceResult);
@@ -297,11 +298,11 @@ public class OTaRestController {
         // 2.获取model对象
         JsonElement order = (JsonElement) GsonUtil.getElement(jsonStr, "ReservationRetrieveRS", "Reservation");
         ReservationInfoMo orderInfo = gson.fromJson(order, ReservationInfoMo.class);
-        log.debug("model in json: {}", gson.toJson(orderInfo));
+        // log.debug("model in json: {}", gson.toJson(orderInfo));
 
         // 3.转换成value对象
         reservationInfoHelper.getReservationInfo(orderInfo);
-        log.debug("value in json: {}", gson.toJson(orderInfo));
+        // log.debug("value in json: {}", gson.toJson(orderInfo));
 
         // 4.转成view对象
         // System.out.println(orderInfo.getCustomer().get(0).getEmail().get(0).getEmailAddress());

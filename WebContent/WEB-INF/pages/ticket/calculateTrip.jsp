@@ -29,5 +29,15 @@ index (航 段)<input type="text" name="index" value=""></input>
 <input type="submit" value="计算税费"/>
 </form>
 
+<h3>往返</h3>
+<form action="${pageContext.request.contextPath}/api/search-flight-details.json" method="post">
+airline <input type="text" name="airline"  value=""></input>
+flightNum <input type="text" name="flightNum"  value=""></input>
+origin <input type="text" name="origin" value=""></input>
+destination <input type="text" name="destination" value=""></input>
+depdate <input type="text" name="depdate" value=""></input>
+<input type="submit" value="计算税费"/>
+</form>
+
 </body>
 </html>
