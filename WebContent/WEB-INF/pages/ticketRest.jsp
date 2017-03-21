@@ -11,59 +11,43 @@
 <%@include file="common.jsp" %>
  
 <script type="text/javascript">
-    $(function(){
-      $.each($("input[type=checkbox]"),function(i,n){
-       if(n.checked)
-       {
-         $(n.value).show();
-       }
-       else
-       {
-         $(n.value).hide();
-       }
-    })
-    })   
+   
 
   $(function(){
-  
-      $("input[type=checkbox]").bind("click",function(){
-       var item=$(this).val();
-       if($(this).attr("checked")=="checked")
-       {
-          $(item).show();
-       }
-       else // 未选中
-       {
-           $(item).hide();
-       }
-     })
-    
-   $.each($("input[type=checkbox]"), function(i, n){
-     if(n.checked)
-     {
-       $().show();
-     }else
-     {
-        $(n.value).hide();
-     }
-   })
-    
-     $("h2").css("color","red");
-     //$("input").attr("size","10");
-    // $("input[name=leg]").attr("size","70");
-     //$("input[name=traveler]").attr("size","90");
-    // $("input[name=customer]").attr("size","90");
-  
-      $("input[type=submit]").css("background","#ffbbaa");
-      $("input[type=submit]").css("border-radius","4px");
-      $("input[type=submit]").css("font-size","16px");
-     //加上ticket
-      //$("input[type=submit]").before($("#ticket"));
-     //加上otacode等参数
-     // $("input[type=submit]").before($("#comm"));
-      $("input[name='category']").css("margin","5px 10px");
-     
-  })
+	 //初始化
+	 $.each($(":checkbox[name='category'] "), function(i, n) {
+				if (n.checked) {
+					$(n.value).show();
+				} else {
+					$(n.value).hide();
+				}
+	})
+
+     // 点击时的选择效果
+	  $(":checkbox[name='category'] ").click(function() {
+			var selVal = this.value;
+			$.each($(":checkbox[name='category'] "), function(i, n) {
+				if (n.value == selVal) {
+					$(n.value).show();
+				} else {
+					n.checked = false;
+					$(n.value).hide();
+				}
+			})
+
+		})
+
+		$("h2").css("color", "red");
+		
+
+		$("input[type=submit]").css("background", "#ffbbaa");
+		$("input[type=submit]").css("border-radius", "4px");
+		$("input[type=submit]").css("font-size", "16px");
+		
+		
+		$("input[name='category']").css("margin", "5px 10px");
+
+	})
 </script>
 
 <style type="text/css">
