@@ -9,13 +9,7 @@
 <jsp:include page="common.jsp"></jsp:include>
 
 <script type="text/javascript"> 
-function format(date) {
-		var month=date.getMonth()+1;
-		var day=date.getDate();
-		month=(month<10)?'0'+month:month;
-		day=(day<10)?'0'+day:day;
-		return date.getFullYear() + '-' +month  +'-' + day;
-	}
+
 
 function pnrInfo(his)
 {
@@ -55,6 +49,8 @@ function AVInfo(his)
       org:$("input[name='Avorg']").val(),
       dst:$("input[name='Avdst']").val(),
       dateStr:$("input[name='AvdateStr']").val(),
+      nowAirline:$(":radio[name='nowairline']").get(0).checked,
+      isdirect:$(":radio[name='isdirect']").get(0).checked,
     },
     function(data)
     {
@@ -63,17 +59,38 @@ function AVInfo(his)
     
     )
 }
+
+ $(function(){
+
+ $(":radio").click(function(){
+     this.checked=  !this.checked;
+ }),
+ 
+  $(".ibeItem :text").css("width","80px");
+  
+ 
+}) 
 </script>
 
+<style type="text/css">
+pre {  
+white-space: pre-wrap;       /* css-3 */ 
+white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */ 
+white-space: -pre-wrap;      /* Opera 4-6 */ 
+white-space: -o-pre-wrap;    /* Opera 7 */ 
+word-wrap: break-word;       /* Internet Explorer 5.5+ */ 
+} 
+</style>
 </head>
 <body>
-	<ol  style="border: double 1px #C0C0C0;margin:10px 5px">
+	<ol  class="ibeItem" style="border: double 1px #C0C0C0;margin:10px 5px">
 		<li>
 			<div>
 				出发地<input type="text" name="Avorg" value="" ></input> 
 				目的地<input type="text" name="Avdst" value=""></input> 
-				日期<input type="text"  
-					name="AvdateStr" value=""></input> 
+				日期<input type="text"  name="AvdateStr" value=""></input> 
+				当前航司<input type="radio"  name="nowairline" checked="checked" ></input>
+				直航<input type="radio"  name="isdirect"  ></input>  
 				<input onclick="AVInfo()"
 					type="submit" value="AV查询" />
 			</div>
@@ -96,10 +113,10 @@ function AVInfo(his)
 
 <div style="margin:20px 2px">
 <h4>查询结果</h4>
-<pre>
+
  <textarea   class="easyui-resizable" rows="22" cols="1000" id="result" readonly="readonly"
- style="border: solid 1px #a0c6e5; color:#00FF00;background-color:black ; width:800px;padding:5px"></textarea>
-</pre>
+ style="border: solid 1px #a0c6e5; color:#00FF00;background-color:black ; width:97%;padding:5px"></textarea>
+
 </div>
 
 </body>

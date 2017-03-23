@@ -39,6 +39,9 @@ import com.travelsky.ibe.client.pnr.RTResult;
 public class IBEcontrol {
 
     private Logger log = LoggerFactory.getLogger(OTaRestController.class);
+
+    // 当前航司
+    private String airlineNow = "GS";
     /*
      * 查询pnr信息
      */
@@ -113,7 +116,8 @@ public class IBEcontrol {
      * 查询开仓情况
      */
     @RequestMapping("/AVinfo")
-    public void AVinfo(String org, String dst, String dateStr, Writer writer, HttpServletRequest request)
+    public void AVinfo(String org, String dst, String dateStr, Boolean nowAirline, Boolean isdirect,
+            Writer writer, HttpServletRequest request)
             throws Exception {
 
         // 检查参数
@@ -127,7 +131,16 @@ public class IBEcontrol {
 
         avreq.setOrg(org);
         avreq.setDst(dst);
-        avreq.setAirline("ALL");
+        avreq.setDirect(isdirect);
+         if (nowAirline)
+         {
+            avreq.setAirline(this.airlineNow);
+        } else {
+            avreq.setAirline("ALL");
+         }
+        
+        // avreq.setAirline("ALL");
+        
 
         SimpleDateFormat localSimpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         try {
